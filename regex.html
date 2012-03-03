@@ -1,0 +1,110 @@
+<html>
+  <!-- RegExComposer created 2011-10-29 by Thorsten Staerk, www.staerk.de/thorsten
+  history:
+  2011-10-29: 2 hours
+  2012-02-19: 2 hours
+  2012-03-03: 1 hour: escape ] and *
+  -->
+  <head>
+    <title>
+      RegExComposer
+    </title>
+  <script type="text/javascript">
+    function eventkeyuptext()
+    {
+      recalculateregex();
+    }
+    function eventdochange()
+    {
+      recalculateregex();
+    }
+    function eventcontainchange()
+    {
+      recalculateregex();
+    }
+    function eventstringchange()
+    {
+      recalculateregex();
+    }
+    function recalculateregex()
+    {
+      // the variable innerregex is used to add characters before or after the regex input by the user
+      $innerregex=document.getElementsByName("text")[0].value;
+      $innerregex=$innerregex.replace(/\\/,"\\\\");
+      $innerregex=$innerregex.replace(/\[/,"\\[");
+      $innerregex=$innerregex.replace(/\]/,"\\]");
+      $innerregex=$innerregex.replace(/\*/,"\\*");
+      $innerregex=$innerregex.replace(/\+/,"\\+");
+      $innerregex=$innerregex.replace(/\|/,"\\|");
+      if (document.getElementsByName("string")[0].value == "character") $innerregex="["+$innerregex+"]";
+      if (document.getElementsByName("do")[0].value=="do")
+      {
+        $newtext="";
+        if (document.getElementsByName("contain")[0].value=="start") $newtext="^";
+	$newtext+=$innerregex;
+        if (document.getElementsByName("contain")[0].value=="end") $newtext+="$";
+	document.getElementsByName("regex")[0].value=$newtext;
+      }
+      else // do not
+      {
+	$newtext="";
+        if (document.getElementsByName("contain")[0].value=="contain") $newtext="^(?!(.*";
+        if (document.getElementsByName("contain")[0].value=="start") $newtext="^(?!(";
+        if (document.getElementsByName("contain")[0].value=="end") $newtext="^(?!(.*";
+	$newtext+=$innerregex;
+	if (document.getElementsByName("contain")[0].value=="contain") $newtext+=".*))";
+	if (document.getElementsByName("contain")[0].value=="start") $newtext+=".*))";
+	if (document.getElementsByName("contain")[0].value=="end") $newtext+="$))";
+	document.getElementsByName("regex")[0].value=$newtext;
+      }
+    }
+  </script>
+  </head>
+
+  <body>
+    <h1>Welcome to Thorsten's Regular Expression Composer</h1>
+    This sites helps you to compose a <a href=http://www.linuxintro.org/wiki/Regex>RegEx</a> out of a normal english sentence. Just compose the sentence below and this site will generate a Regular Expression out of it.
+    <h2>English sentence</h2>
+    Show all lines that 
+    <select name="do" onchange="eventdochange()">
+      <option value="do">
+	do
+      </option>
+      <option value="do not">
+	do not
+      </option>
+    </select>
+    <select name="contain" onchange="eventcontainchange()">
+      <option value="contain">
+	contain
+      </option>
+      <option value="start">
+	start with
+      </option>
+      <option value="end">
+	end with
+      </option>
+    </select>
+    <select name="string" onchange="eventstringchange()">
+      <option value="string">
+	the string
+      </option>
+      <option value="character">
+	one of the characters
+      </option>
+    </select>
+    <input name="text" type="text" onkeyup="eventkeyuptext()" value="foo">
+    </input>
+    <br />
+    <h2>Resulting Regular Expression</h2>
+    <textarea name="regex">foo
+    </textarea>
+    <br />
+    <h2>What now?</h2>
+    You can test this regular expression using the <a href=http://www.linuxintro.org/wiki/Bash>bash shell</a> and the command
+    <br />
+    <tt>
+    grep -P '<i>regex</i>' regex.txt
+    </tt>
+  </body>
+</html>
