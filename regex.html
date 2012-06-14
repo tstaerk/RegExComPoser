@@ -6,7 +6,6 @@
   2011-10-29: 2 hours
   2012-02-19: 2 hours
   2012-03-03: 1 hour: escape ] and *
-  2012-06-15: 1 hour: do not escape inside []. Thanks Fabian!
   -->
   <head>
     <title>
@@ -33,16 +32,13 @@
     {
       // the variable innerregex is used to add characters before or after the regex input by the user
       $innerregex=document.getElementsByName("text")[0].value;
-      if (document.getElementsByName("string")[0].value != "character")
-      {
-        $innerregex=$innerregex.replace(/\\/,"\\\\");
-        $innerregex=$innerregex.replace(/\[/,"\\[");
-        $innerregex=$innerregex.replace(/\]/,"\\]");
-        $innerregex=$innerregex.replace(/\*/,"\\*");
-        $innerregex=$innerregex.replace(/\+/,"\\+");
-        $innerregex=$innerregex.replace(/\|/,"\\|");
-      }
-      else { $innerregex="["+$innerregex+"]"; };
+      $innerregex=$innerregex.replace(/\\/,"\\\\");
+      $innerregex=$innerregex.replace(/\[/,"\\[");
+      $innerregex=$innerregex.replace(/\]/,"\\]");
+      $innerregex=$innerregex.replace(/\*/,"\\*");
+      $innerregex=$innerregex.replace(/\+/,"\\+");
+      $innerregex=$innerregex.replace(/\|/,"\\|");
+      if (document.getElementsByName("string")[0].value == "character") $innerregex="["+$innerregex+"]";
       if (document.getElementsByName("do")[0].value=="do")
       {
         $newtext="";
@@ -118,3 +114,4 @@
     <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.staerk.de/regex&amp;layout=standard&amp;show_faces=false&amp;width=450&amp;action=like&amp;colorscheme=bright" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:450px; height:40px"></iframe>
   </body>
 </html>
+
