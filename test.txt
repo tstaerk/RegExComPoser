@@ -1,0 +1,4 @@
+This line contains \ and no other special characters
+This line contains * and no other special characters
+This line contains no special characters but a dot.
+This line does not contain special characters
