@@ -32,9 +32,9 @@
     function recalculateregex()
     {
       // the variable innerregex is used to add characters before or after the regex input by the user
+      $innerregex=document.getElementsByName("text")[0].value;
       if (document.getElementsByName("string")[0].value != "character")
       {
-        $innerregex=document.getElementsByName("text")[0].value;
         $innerregex=$innerregex.replace(/\\/,"\\\\");
         $innerregex=$innerregex.replace(/\[/,"\\[");
         $innerregex=$innerregex.replace(/\]/,"\\]");
