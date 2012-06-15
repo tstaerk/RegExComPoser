@@ -6,6 +6,7 @@
   2011-10-29: 2 hours
   2012-02-19: 2 hours
   2012-03-03: 1 hour: escape ] and *
+  2012-06-15: 1 hour: do not escape inside []. Thanks Fabian!
   -->
   <head>
     <title>
@@ -31,14 +32,17 @@
     function recalculateregex()
     {
       // the variable innerregex is used to add characters before or after the regex input by the user
-      $innerregex=document.getElementsByName("text")[0].value;
-      $innerregex=$innerregex.replace(/\\/,"\\\\");
-      $innerregex=$innerregex.replace(/\[/,"\\[");
-      $innerregex=$innerregex.replace(/\]/,"\\]");
-      $innerregex=$innerregex.replace(/\*/,"\\*");
-      $innerregex=$innerregex.replace(/\+/,"\\+");
-      $innerregex=$innerregex.replace(/\|/,"\\|");
-      if (document.getElementsByName("string")[0].value == "character") $innerregex="["+$innerregex+"]";
+      if (document.getElementsByName("string")[0].value != "character")
+      {
+        $innerregex=document.getElementsByName("text")[0].value;
+        $innerregex=$innerregex.replace(/\\/,"\\\\");
+        $innerregex=$innerregex.replace(/\[/,"\\[");
+        $innerregex=$innerregex.replace(/\]/,"\\]");
+        $innerregex=$innerregex.replace(/\*/,"\\*");
+        $innerregex=$innerregex.replace(/\+/,"\\+");
+        $innerregex=$innerregex.replace(/\|/,"\\|");
+      }
+      else { $innerregex="["+$innerregex+"]"; };
       if (document.getElementsByName("do")[0].value=="do")
       {
         $newtext="";
