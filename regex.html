@@ -38,6 +38,7 @@
       $innerregex=$innerregex.replace(/\*/,"\\*");
       $innerregex=$innerregex.replace(/\+/,"\\+");
       $innerregex=$innerregex.replace(/\|/,"\\|");
+      $innerregex=$innerregex.replace(/\./,"\\.");
       if (document.getElementsByName("string")[0].value == "character") $innerregex="["+$innerregex+"]";
       if (document.getElementsByName("do")[0].value=="do")
       {
