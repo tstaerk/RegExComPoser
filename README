@@ -1,2 +1,9 @@
 RegExComPoser helps you to compose a RegEx out of a normal english sentence. Just compose the sentence in an html form and the site will generate a Regular Expression out of it.
-Copyright (c) 2012 by Thorsten Staerk, http://www.staerk.de/thorsten
+
+If you want to run it as a docker container, feel free: 
+ * run
+    docker build -t regex .
+    docker run -d --name regex -p 8080:80 regex
+ * then surf to localhost:8080
+
+Copyright (c) 2012-2024 by Thorsten Staerk, http://www.staerk.de/thorsten
